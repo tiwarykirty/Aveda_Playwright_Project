@@ -6,6 +6,9 @@ export default defineConfig({
     use: {
         headless: false,
         baseURL: process.env.BASE_URL,
+        testIdAttribute: 'data-test',
+        screenshot: 'on',
+        video: 'on',
     },
     reporter: [["html", { open: "always" }]],
     projects: [
