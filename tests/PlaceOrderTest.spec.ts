@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { InventoryPage } from '../pages/InventoryPage';
 import { CartPage } from '../pages/CartPage';
@@ -6,16 +6,23 @@ import { CheckoutPage } from '../pages/CheckoutPage';
 import { CheckoutOverviewPage } from '../pages/CheckoutOverviewPage';
 import { OrderConfirmationPage } from '../pages/OrderConfirmationPage';
 
-test("Place an Order for Sauce Lab BackPack", async ({ page }) => {
+let loginPage: LoginPage;
+let inventoryPage: InventoryPage;
+let cartPage: CartPage;
+let checkoutPage: CheckoutPage;
+let checkoutOverviewPage: CheckoutOverviewPage;
+let orderConfirmationPage: OrderConfirmationPage;
 
+test.beforeEach(async ({ page }) => {
+    loginPage = new LoginPage(page);
+    inventoryPage = new InventoryPage(page);
+    cartPage = new CartPage(page);
+    checkoutPage = new CheckoutPage(page);
+    checkoutOverviewPage = new CheckoutOverviewPage(page);
+    orderConfirmationPage = new OrderConfirmationPage(page);
+});
 
-    const loginPage = new LoginPage(page);
-    const inventoryPage = new InventoryPage(page);
-    const cartPage = new CartPage(page);
-    const checkoutPage = new CheckoutPage(page);
-    const checkoutOverviewPage = new CheckoutOverviewPage(page);
-    const orderConfirmationPage = new OrderConfirmationPage(page);
-
+test("Place an Order for Sauce Lab BackPack", async () => {
     await loginPage.performLogin();
     await inventoryPage.verifyBackPackAndAddtoCart();
     await inventoryPage.clickOnCartButton();
@@ -25,6 +32,4 @@ test("Place an Order for Sauce Lab BackPack", async ({ page }) => {
     await checkoutOverviewPage.performCheckoutFlowForSLBackpack();
     await orderConfirmationPage.verifySuccessMessage();
     await orderConfirmationPage.verifyPDFDownload();
-
-
 })

@@ -2,14 +2,14 @@ import { Page, Locator, expect } from '@playwright/test';
 
 export class CheckoutOverviewPage {
 
-    paymentInfoValue: Locator;
-    shippingInfoValue: Locator;
-    totalCost: Locator;
-    itemCost: Locator;
-    taxCost: Locator;
-    checkOutTitle: Locator;
-    inventoryPrice: Locator;
-    finishButton: Locator;
+    private readonly paymentInfoValue: Locator;
+    private readonly shippingInfoValue: Locator;
+    private readonly totalCost: Locator;
+    private readonly itemCost: Locator;
+    private readonly taxCost: Locator;
+    private readonly checkoutTitle: Locator;
+    private readonly inventoryPrice: Locator;
+    private readonly finishButton: Locator;
 
     constructor(private readonly page: Page) {
         this.paymentInfoValue = page.getByTestId('payment-info-value');
@@ -17,14 +17,14 @@ export class CheckoutOverviewPage {
         this.totalCost = page.getByTestId('total-label');
         this.itemCost = page.getByTestId('subtotal-label');
         this.taxCost = page.getByTestId('tax-label');
-        this.checkOutTitle = page.locator('.title');
+        this.checkoutTitle = page.locator('.title');
         this.inventoryPrice = page.getByTestId('inventory-item-price');
         this.finishButton = page.locator('#finish');
     }
 
 
     async verifyCheckoutOverviewPage(): Promise<void> {
-        await expect(this.checkOutTitle).toHaveText('Checkout: Overview');
+        await expect(this.checkoutTitle).toHaveText('Checkout: Overview');
     }
 
 

@@ -23,17 +23,17 @@ export class CheckoutPage {
 
     async enterFirstName(firstName: string): Promise<void> {
         await this.firstNameInput.fill(firstName);
-        await expect(this.firstNameInput).toHaveAttribute('value', firstName);
+        await expect(this.firstNameInput).toHaveValue(firstName);
     }
 
     async enterLastName(lastName: string): Promise<void> {
         await this.lastNameInput.fill(lastName);
-        await expect(this.lastNameInput).toHaveAttribute('value', lastName);
+        await expect(this.lastNameInput).toHaveValue(lastName);
     }
 
     async enterZipCode(zipCode: string): Promise<void> {
         await this.zipCodeInput.fill(zipCode);
-        await expect(this.zipCodeInput).toHaveAttribute('value', zipCode);
+        await expect(this.zipCodeInput).toHaveValue(zipCode);
     }
 
     async clickOnCheckoutContinueButton(): Promise<void> {

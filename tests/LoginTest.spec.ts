@@ -1,10 +1,12 @@
 import { expect, test } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 
-test("Login should be successful", async ({ page }) => {
+let loginPage: LoginPage;
 
-    const loginPage = new LoginPage(page);
+test.beforeEach(async ({ page }) => {
+    loginPage = new LoginPage(page);
+});
+
+test("Login should be successful", async () => {
     await loginPage.performLogin();
-
-
 })
